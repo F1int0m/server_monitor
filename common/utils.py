@@ -1,5 +1,6 @@
 import math
 
+from common.const import Emoji
 from common.models.monitoring_models import JobData
 
 SIZE_NAMES = ('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB')
@@ -31,13 +32,14 @@ def format_monitoring_message(
         job_data: JobData,
 ):
     message_text = (
-        f'Upload: {uploaded}\n'
-        f'Download: {downloaded}\n'
-        f'Upload Speed: {current_upload}/s\n'
-        f'Download Speed: {current_download}/s\n'
+        f'{Emoji.up_graph} Upload:' + '\t' * 23 + f'{uploaded}\n' +
+        f'{Emoji.down_graph} Download:' + '\t' * 18 + f'{downloaded}\n' +
+        '\n'
+        f'{Emoji.up_arrow} Upload Speed:' + '\t' * 11 + f'{current_upload}/s\n' +
+        f'{Emoji.down_arrow} Download Speed:' + '\t' * 6 + f'{current_download}/s\n' +
         f'\n'
-        f'Monitoring start at {job_data.start_date}\n'
-        f'Last update at {job_data.last_update}\n'
+        f'{Emoji.calendar} Monitoring start at {job_data.start_date}\n'
+        f'{Emoji.clock} Last update at {job_data.last_update}\n'
     )
 
     return message_text

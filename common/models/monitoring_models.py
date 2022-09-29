@@ -13,7 +13,7 @@ class JobData(BaseModel):
     current_received_bytes: int = Field(default=0)
     current_upload_bytes: int = Field(default=0)
 
-    update_interval: int = Field(default=config.DEFAULT_UPDATE_INTERVAL)
+    update_interval: int = Field(default=config.DEFAULT_UPDATE_INTERVAL, ge=config.DEFAULT_UPDATE_INTERVAL)
 
     message_id: Optional[int] = Field()
 
