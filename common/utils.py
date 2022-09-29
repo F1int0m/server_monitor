@@ -1,5 +1,7 @@
 import math
 
+from common.models.monitoring_models import JobData
+
 SIZE_NAMES = ('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB')
 
 
@@ -21,12 +23,21 @@ def convert_to_human_readable_size(size: int):
     return f'{real_size} {SIZE_NAMES[size_index]}'
 
 
-def format_monitoring_message(total_upload: str, total_download: str, current_upload: str, current_download: str):
+def format_monitoring_message(
+        uploaded: str,
+        downloaded: str,
+        current_upload: str,
+        current_download: str,
+        job_data: JobData,
+):
     message_text = (
-        f'Upload: {total_upload}\n'
-        f'Download: {total_download}\n'
+        f'Upload: {uploaded}\n'
+        f'Download: {downloaded}\n'
         f'Upload Speed: {current_upload}/s\n'
         f'Download Speed: {current_download}/s\n'
+        f'\n'
+        f'Monitoring start at {job_data.start_date}\n'
+        f'Last update at {job_data.last_update}\n'
     )
 
     return message_text
